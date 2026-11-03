@@ -573,7 +573,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
       const nameHtml = `<h3>${name}</h3>`
 
       const description = tooltipData?.descriptionLocalised ??
-        await TextEditor.enrichHTML(coreModule.api.Utils.i18n(tooltipData?.description ?? ''), { async: true })
+        await foundry.applications.ux.TextEditor.implementation.enrichHTML(coreModule.api.Utils.i18n(tooltipData?.description ?? ''))
 
       const rarityHtml = tooltipData?.rarity
         ? `<div class="tah-tags-wrapper"><span class="tah-tag ${this.#getItemRarity(tooltipData.rarity)}">Rarity: ${tooltipData.rarity}</span></div>`

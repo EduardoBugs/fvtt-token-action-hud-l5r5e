@@ -20,7 +20,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
       const rightClickAction = ['ring']
 
       if (renderable.includes(actionTypeId) && this.isRenderItem()) {
-        return this.doRenderItem(this.actor, actionId)
+        return this.renderItem(this.actor, actionId)
       }
 
       if (rightClickAction.includes(actionTypeId) && this.isRenderItem()) {
@@ -139,6 +139,8 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
     #handleWeaponAction(_event, actor, actionId) {
       const weapon = actor.items.get(actionId)
       new game.l5r5e.DicePickerDialog({
+        actor,
+        item: weapon,
         skillId: weapon.system.skill
       }).render(true);
     }
@@ -150,8 +152,9 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
      * @param {object} actor    The actor
      * @param {string} actionId The action id
      */
-    #handleRingAction(_event, _actor, actionId) {
+    #handleRingAction(_event, actor, actionId) {
       new game.l5r5e.DicePickerDialog({
+        actor,
         ringId: actionId
       }).render(true);
     }
@@ -163,8 +166,9 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
      * @param {object} actor    The actor
      * @param {string} actionId The action id
      */
-    #handleSkillAction(_event, _actor, actionId) {
+    #handleSkillAction(_event, actor, actionId) {
       new game.l5r5e.DicePickerDialog({
+        actor,
         skillId: actionId
       }).render(true);
     }
@@ -184,6 +188,8 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
       }
 
       new game.l5r5e.DicePickerDialog({
+        actor,
+        item: technique,
         skillsList: technique.system.skill,
         ringId: technique.system.ring,
         difficulty: technique.system.difficulty
